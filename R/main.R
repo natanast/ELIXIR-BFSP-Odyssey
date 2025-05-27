@@ -57,6 +57,7 @@ run_odyssey <- function(...) {
 
         # sidebar options ------------------
         sidebar = sidebar(
+            
             sourceInput("source"),
             hr(),
             
