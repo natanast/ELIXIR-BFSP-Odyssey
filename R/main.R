@@ -33,7 +33,7 @@ run_odyssey <- function(...) {
                     icon("github", lib = "font-awesome"),
                     target = "_blank",
                     style = "color: #F3F6FA; margin-top: 5px;
-               font-size: 1.5em; margin-left: 0; padding-right: 15px;"
+                    font-size: 1.5em; margin-left: 0; padding-right: 15px;"
                 )
                 # a(
                 #   href = "https://github.com/npechl/odyssey/issues",
@@ -58,33 +58,33 @@ run_odyssey <- function(...) {
         # sidebar options ------------------
         sidebar = sidebar(
             
-            sourceInput("source"),
-            hr(),
+            # sourceInput("source"),
+            # hr(),
             
-            tableOptions("table1"),
+            tableOptions("table1"), 
             hr(),
 
             fluidPage(
                 style = "position: absolute; bottom: 15px; left: 0; right: 0;",
                 h5(
                     style = "color: #004164;"
-                ),
-                p(
-                    a(
-                        href = "https://github.com/npechl",
-                        style = "color: #004164;",
-                        "Nikos Pechlivanis ",
-                        icon("github", lib = "font-awesome")
-                    )
-                ),
-                p(
-                    a(
-                        href = "https://github.com/natanast",
-                        style = "color: #004164;",
-                        "Natasa Anastasiadou ",
-                        icon("github", lib = "font-awesome")
-                    )
                 )
+                # p(
+                #     a(
+                #         href = "https://github.com/npechl",
+                #         style = "color: #004164;",
+                #         "Nikos Pechlivanis ",
+                #         icon("github", lib = "font-awesome")
+                #     )
+                # ),
+                # p(
+                #     a(
+                #         href = "https://github.com/natanast",
+                #         style = "color: #004164;",
+                #         "Natasa Anastasiadou ",
+                #         icon("github", lib = "font-awesome")
+                #     )
+                # )
             )
 
         ),

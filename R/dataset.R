@@ -1,3 +1,10 @@
+european_countries <- c(
+    "Greece", "Norway" 
+    # "France", "Germany", "Italy", "Spain", "Sweden",
+    # "Finland", "Denmark", "Poland", "Austria", "Belgium", "Netherlands",
+    # "Portugal", "Czech Republic", "Hungary", "Switzerland", "Slovakia",
+    # "Slovenia", "Croatia", "Bulgaria", "Romania", "Estonia", "Latvia", "Lithuania"
+)
 
 #' Title
 #'
@@ -5,11 +12,31 @@
 #'
 #' @export
 #'
-sourceInput    <- function(id) {
-
-  radioButtons(NS(id, "source_input"), "Input data source", choices = c("ENA"))
-
-}
+# sourceInput    <- function(id) {
+# 
+#     tagList(
+#         
+#         # radioButtons(
+#         #     NS(id, "source_input"), 
+#         #     "Input data source", 
+#         #     choices = c("ENA", "GBIF")
+#         # ),
+#         # hr(),
+#         # 
+#         # selectInput(
+#         #     NS(id, "source_input1"),
+#         #     "Country of interest: ",
+#         #     choices = c(european_countries),
+#         #     selected = "Greece"
+#         # ),
+#         # 
+#         # actionButton("go", "Load Data"),
+#         # hr()
+#         
+#     )
+# 
+# 
+# }
 
 #' Title
 #'
@@ -22,13 +49,23 @@ tableOptions   <- function(id) {
 
     tagList(
         
+        radioButtons(
+            NS(id, "source_input"), 
+            "Input data source", 
+            choices = c("ENA", "GBIF")
+        ),
+        
         selectInput(
             NS(id, "source_input1"),
             "Country of interest: ",
-            choices = c("Greece", "Norway"),
+            choices = c(european_countries),
             selected = "Greece"
         ),
+
+        actionButton("go", "Load Data"),
+
         hr(),
+        
 
         checkboxInput(NS(id, "table_filter"), "Show filter", FALSE),
         hr(),
