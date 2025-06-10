@@ -127,8 +127,8 @@ run_odyssey <- function(...) {
                     value_box(
                         title = "Number of tax divisions",
                         value = textOutput("tax_division"),
-                        p("Tax with maximum number: ", ),
-                        p("Tax with minimum number: ",  ),
+                        # p("Tax with maximum number: ", ),
+                        # p("Tax with minimum number: ",  ),
                         theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
                         showcase = echarts4rOutput("plot2"),
                         full_screen = TRUE
@@ -179,10 +179,6 @@ run_odyssey <- function(...) {
                     br(),
                     card(full_screen = TRUE, fill = TRUE, reactableOutput("table"))
                 ),
-                
-                # mainPanel(
-                #     DT::dataTableOutput("results")
-                # ),
 
                 downloadButton("download", "Download as CSV")
 
