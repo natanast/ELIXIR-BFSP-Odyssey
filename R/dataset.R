@@ -112,9 +112,10 @@ tableOptions   <- function(id) {
                 "Tag3"            = "tag3"
             )
         ),
+      
         hr()
+ )
 
-    )
 
 }
 
