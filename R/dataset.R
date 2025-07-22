@@ -428,8 +428,9 @@ hometextUi     <- function(id) {
         
         renderUI(
             HTML("
+            
         <div>
-          <img src='https://raw.githubusercontent.com/natanast/ELIXIR-BFSP-Odyssey/main/inst/pic/logo_nobg.png' width='350' alt='Odyssey Logo' style='float: right; margin-top: -70px; margin-right: -25px;'/>
+          <img src='https://raw.githubusercontent.com/natanast/ELIXIR-BFSP-Odyssey/dev/inst/pic/logo_nobg.png' width='250' alt='Odyssey Logo' style='float: right; margin-top: -50px; margin-right: -20px;'/>
           <h3 style='color: #004164;'>Welcome</h3>
           <h6 style='color: #326286;'>Welcome to Odyssey, an interactive R Shiny web application designed to facilitate the exploration of molecular biodiversity in Greece.</h6>
           <br>
