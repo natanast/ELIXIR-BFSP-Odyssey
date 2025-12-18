@@ -1,4 +1,4 @@
-# Odyssey ![](/inst/pic/logo_nobg.png)
+# Odyssey ![Odyssey Logo](reference/figures/logo_nobg.png)
 
 Odyssey is an R shiny application for the exploration of Molecular
 Biodiversity in Greece and Norway.
@@ -112,3 +112,9 @@ CONDUCT](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/CODE_OF_COND
 - [`tree_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/tree_server.md)
   : Overview Tab: Tree Chart of Taxonomic Hierarchy
 
+# Articles
+
+### All vignettes
+
+- [Introduction to
+  Odyssey](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/articles/get-started.md):

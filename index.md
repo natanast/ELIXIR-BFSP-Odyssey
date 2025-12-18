@@ -1,4 +1,4 @@
-# Odyssey ![](/inst/pic/logo_nobg.png)
+# Odyssey ![Odyssey Logo](reference/figures/logo_nobg.png)
 
 Odyssey is an R shiny application for the exploration of Molecular
 Biodiversity in Greece and Norway.
