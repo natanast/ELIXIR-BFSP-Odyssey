@@ -94,6 +94,12 @@ dataset_server <- function(id, df) {
 
             # Normalize source tagging (do not override assigned source)
             data$source <- toupper(trimws(as.character(data$source)))
+            data$row_key <- paste0(
+                data$source, "||",
+                ifelse(is.na(data$accession), "", as.character(data$accession)), "||",
+                ifelse(is.na(data$scientific_name), "", as.character(data$scientific_name)), "||",
+                ifelse(is.na(data$first_public), "", as.character(data$first_public))
+            )
             
             # Fix tax divisions (ENA only, GBIF will be NA)
             tax_division_lookup <- list(
@@ -188,6 +194,10 @@ dataset_server <- function(id, df) {
 #'
 #' @param id Character string for namespacing the module
 #' @param df A reactive \code{data.table} containing the sequence dataset.
+#' @param source Character string indicating which data source table to render:
+#'   \code{"ENA"} or \code{"GBIF"}.
+#' @param table_options Optional reactive expression returning shared table
+#'   options (filter toggle and grouping columns).
 #'
 #' @return A \code{reactable} table rendered in the UI.
 #'
@@ -260,8 +270,9 @@ table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL
             ena_cols <- c(
                 "accession", "first_public", "country", "altitude",
                 "host", "host_tax_id", "isolation_source",
-                "scientific_name", "tax_id", "topology",
-                "tax_division2", "tag1", "tag2", "keywords"
+                "scientific_name", "tax_id",
+                "lat", "long",
+                "tax_division2", "tag1", "tag2"
             )
 
             gbif_cols <- c(
@@ -275,6 +286,9 @@ table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL
                 cols_to_show <- intersect(ena_cols, names(data))
             } else {
                 cols_to_show <- intersect(gbif_cols, names(data))
+            }
+            if ("row_key" %in% names(data) && !"row_key" %in% cols_to_show) {
+                cols_to_show <- c(cols_to_show, "row_key")
             }
 
             filterable_flag <- TRUE
@@ -299,7 +313,7 @@ table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL
                 "https://www.gbif.org/occurrence/%s"
             }
 
-            reactable(
+            tbl <- reactable(
                 data[, ..cols_to_show],
                 columns = list(
                     accession = colDef(
@@ -308,7 +322,8 @@ table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL
                             url <- sprintf(accession_url, value)
                             htmltools::tags$a(href = url, target = "_blank", as.character(value))
                         }
-                    )
+                    ),
+                    row_key = colDef(show = FALSE)
                 ),
                 filterable = filterable_flag,
                 groupBy = group_by_cols,
@@ -316,6 +331,25 @@ table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL
                 defaultPageSize = 15,
                 showPageSizeOptions = TRUE,
                 pageSizeOptions = c(15, 25, 50, 100)
+            )
+
+            htmlwidgets::onRender(
+                tbl,
+                sprintf(
+                    "function(el, x) {
+                      var sendKeys = function() {
+                        var state = Reactable.getState(el.id);
+                        if (!state || !state.sortedData) return;
+                        var keys = state.sortedData
+                          .map(function(row) { return row.row_key; })
+                          .filter(function(v) { return v !== null && v !== undefined; });
+                        Shiny.setInputValue('%s', keys, {priority: 'event'});
+                      };
+                      Reactable.onStateChange(el.id, function(state) { sendKeys(); });
+                      sendKeys();
+                    }",
+                    session$ns("filtered_keys")
+                )
             )
 
         })

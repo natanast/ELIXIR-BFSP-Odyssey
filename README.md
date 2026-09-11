@@ -2,7 +2,7 @@
 
 Odyssey is an R shiny application for the exploration of Molecular Biodiversity in Greece and Norway.
 
-## Installation
+## Installation 
 
 ``` r
 # install.packages("remotes")
@@ -27,3 +27,4 @@ This work, as a whole, is licensed under the [MIT license](https://github.com/np
 The code contained in this website is simultaneously available under the MIT license; this means that you are free to use it in your own packages, as long as you cite the source.
 
 Please also refer to [CODE OF CONDUCT](CODE_OF_CONDUCT.md).
+

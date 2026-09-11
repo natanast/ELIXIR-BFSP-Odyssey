@@ -4,18 +4,40 @@
 \alias{fetch_gbif_data}
 \title{Helper function: GBIF data retrieval}
 \usage{
-fetch_gbif_data(country, date_range)
+fetch_gbif_data(
+  country,
+  date_range,
+  basis_of_record = "MATERIAL_SAMPLE",
+  area_bounds = NULL,
+  scientific_name = NULL,
+  mode = c("auto", "search", "download"),
+  max_rows = 30000
+)
 }
 \arguments{
 \item{country}{Character string specifying the country (e.g. "Greece", "Norway").}
 
 \item{date_range}{A Date vector of length 2 specifying start and end dates.}
+
+\item{basis_of_record}{Character vector of GBIF basisOfRecord values.}
+
+\item{area_bounds}{Optional list with \code{west}, \code{east}, \code{south}, and \code{north}.}
+
+\item{scientific_name}{Optional scientific name filter. If \code{NULL} or empty,
+no scientific name filter is applied.}
+
+\item{mode}{GBIF retrieval mode: \code{"auto"}, \code{"search"}, or
+\code{"download"}. Auto uses \code{occ_download} for broad queries when
+credentials are available, otherwise falls back to \code{occ_search}.}
+
+\item{max_rows}{Maximum number of GBIF rows to fetch/return when using
+\code{occ_search}. Set high by default for unrestricted loading.}
 }
 \value{
 A \code{data.table} containing GBIF occurrence data.
 }
 \description{
-Retrieves occurrence data from GBIF based on country and date range.
+Retrieves occurrence data from GBIF based on country, date range, and basisOfRecord.
 }
 \details{
 This function queries the GBIF API using the provided filters and returns

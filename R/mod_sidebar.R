@@ -43,6 +43,31 @@ source_ui <- function(id) {
             end = Sys.Date() - 330, 
             max =  Sys.Date()
         ),
+
+        textInput(
+            NS(id, "scientific_name"),
+            "Scientific name (optional)",
+            value = "",
+            placeholder = "e.g. Fagus"
+        ),
+
+        selectizeInput(
+            NS(id, "kingdom_filter"),
+            "Kingdom (optional)",
+            choices = c(
+                "Animalia",
+                "Invertebrates",
+                "Vertebrates",
+                "Mammalia",
+                "Plantae",
+                "Fungi",
+                "Prokaryota",
+                "Viruses",
+                "Environment"
+            ),
+            selected = NULL,
+            multiple = TRUE
+        ),
         
         conditionalPanel(
             condition = sprintf(
